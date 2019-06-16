@@ -7,9 +7,7 @@ import org.apache.spark.ml.clustering.KMeans
 import org.apache.spark.ml.feature.{HashingTF, IDF, RFormula}
 import org.apache.spark.sql.SparkSession
 
-/**
-  * Created by zheng on 2018/1/10.
-  */
+
 object Kmeans_news {
   def main(args: Array[String]): Unit = {
     //    定义结巴分词类的序列化

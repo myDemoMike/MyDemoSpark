@@ -13,9 +13,7 @@ import org.apache.spark.sql.{Row, SaveMode, SparkSession}
 import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
-/**
-  * Created by zheng on 2018/1/19.
-  */
+
 object StreamFromKafka {
   def main(args: Array[String]): Unit = {
 

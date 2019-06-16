@@ -9,9 +9,8 @@ import org.apache.spark.mllib.linalg.{Vector, Vectors}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import scala._
-/**
-  * Created by zheng on 2017/12/17.
-  */
+
+
 object Test {
 /*  def main(args: Array[String]): Unit = {
     val warehouselocation = "hdfs://user/hive/warehouse/badou.db"

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ./bin/spark-shell --master yarn-client --jars /usr/local/src/apache-hive-1.2.2-bin/lib/mysql-connector-java-5.1.34.jar
 
 create EXTERNAL TABLE lcs_test

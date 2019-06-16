@@ -2,9 +2,7 @@ package com.my.base.schema
 
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
-/**
-  * Created by zheng on 2018/1/25.
-  */
+
 object Schema {
   val NewKeyWordSchema = StructType(Array(
     StructField("word", StringType),

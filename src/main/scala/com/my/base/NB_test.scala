@@ -10,9 +10,7 @@ import org.apache.spark.ml.feature.{HashingTF, IDF, StringIndexer}
 import org.apache.spark.sql.functions.{col, udf}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
-/**
-  * Created by zheng on 2018/1/9.
-  */
+
 object NB_test {
   def main(args: Array[String]) = {
 
