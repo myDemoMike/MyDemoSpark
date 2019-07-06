@@ -15,11 +15,13 @@ object VectorIndexerDemo {
     val indexer = new VectorIndexer()
       .setInputCol("features")
       .setOutputCol("indexed")
-      .setMaxCategories(10)
+      .setMaxCategories(1)
 
     val indexerModel = indexer.fit(data)
 
+
     val categoricalFeatures: Set[Int] = indexerModel.categoryMaps.keys.toSet
+    // 分类的特征有多少列   连续的为总列-分类的特征
     println(s"Chose ${categoricalFeatures.size} categorical features: " +
       categoricalFeatures.mkString(", "))
 
