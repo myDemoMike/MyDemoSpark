@@ -1,4 +1,4 @@
-package com.my.base
+package com.my.base.kmeans
 
 import com.huaban.analysis.jieba.JiebaSegmenter
 import com.my.base.jieba.JiebaSeg

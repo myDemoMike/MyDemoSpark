@@ -28,7 +28,6 @@ object DecisionTreeClassTest {
 
     val df_ohDone = rformula_model.transform(df).select("features","indexLabel")
 
-
     val featureIndexer = new VectorIndexer()
       .setInputCol("features")
       .setOutputCol("indexedFeatures")

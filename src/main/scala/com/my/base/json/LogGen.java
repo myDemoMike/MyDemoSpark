@@ -1,4 +1,4 @@
-package com.my.base;
+package com.my.base.json;
 
 import java.io.Serializable;
 

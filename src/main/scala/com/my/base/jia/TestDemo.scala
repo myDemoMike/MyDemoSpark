@@ -8,7 +8,6 @@ import org.apache.spark.{SparkContext, SparkConf}
   */
 object TestDemo {
 
-  object RDD_Test {
     def main(args: Array[String]) {
       val input = args(0)
 
@@ -91,7 +90,6 @@ object TestDemo {
       case Some(s) => s
       case None => "None"
     }
-  }
 
 
 

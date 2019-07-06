@@ -22,6 +22,7 @@ object FeatureEngineer {
 
   //user feature generator
   def UserFeat(orders:DataFrame,priorsOrders:DataFrame): DataFrame ={
+    // 从dataFrame拿到Session
     val spark = orders.sparkSession
     import spark.implicits._
     val UserOrderMeanDay = orders

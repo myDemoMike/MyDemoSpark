@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 import com.alibaba.fastjson.JSON
-import com.my.base.LogGen
+import com.my.base.json.LogGen
 import com.my.base.schema.Schema
 import org.apache.spark.SparkConf
 import org.apache.spark.rdd.RDD

@@ -1,7 +1,7 @@
-package com.my.base.kmeans
+package com.my.base.als
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.recommendation.Rating
+import org.apache.spark.{SparkConf, SparkContext}
 
 object MovieLensALS {
   def main(args: Array[String]) {
@@ -30,6 +30,3 @@ object MovieLensALS {
       + numUsers + " users on " + numMovies + " movies.")
   }
 }
-
-
-

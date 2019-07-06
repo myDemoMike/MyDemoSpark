@@ -1,9 +1,9 @@
-package com.my.base.scala
+package com.my.base.operator
 
 /**
   * Created by yuan on 2017/12/20.
   */
-object Test_for {
+object Scala_for {
   def main(args: Array[String]) {
 
     //1到10

@@ -1,7 +1,6 @@
-package com.my.base
+package com.my.base.json
 
 import com.alibaba.fastjson.JSON
-
 
 
 object JsonTest {

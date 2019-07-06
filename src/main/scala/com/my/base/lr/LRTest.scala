@@ -1,6 +1,6 @@
 package com.my.base.lr
 
-import breeze.linalg.max
+import org.apache.spark.SparkConf
 import org.apache.spark.ml.classification.{BinaryLogisticRegressionSummary, LogisticRegression}
 import org.apache.spark.ml.feature.RFormula
 import org.apache.spark.sql.SparkSession
@@ -8,20 +8,24 @@ import org.apache.spark.sql.SparkSession
 
 object LRTest {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder.appName("Decison Tree Classification").enableHiveSupport().getOrCreate()
+    val conf = new SparkConf()
+      .setMaster("local[*]")
+    val spark = SparkSession.builder.appName("LRTest").config(conf).enableHiveSupport().getOrCreate()
 
-    val priors = spark.sql("select * from badou.priors")
-    val trains = spark.sql("select * from badou.trains ")
-    val products = spark.sql("select * from badou.products")
-//    val aisles = spark.sql("select * from badou.aisles")
-    val orders = spark.sql("select * from badou.orders")
-//    val departments = spark.sql("select * from badou.departments")
+    // 订单id 产品id 加入购物车的顺序 是否再次购买过   行为数据
+    val priors = spark.sql("select * from test.priors")
+    //   行为数据
+    val trains = spark.sql("select * from test.trains ")
+    val products = spark.sql("select * from test.products")
+//    val aisles = spark.sql("select * from test.aisles")
+    val orders = spark.sql("select * from test.orders")
+//    val departments = spark.sql("select * from test.departments")
 
     val priorsOrders = priors.join(orders,"order_id")
 
     val product3Feat = FeatureEngineer.Product3Feat(priors,products)
+    product3Feat.show(20,false)
 //      .drop(" product_name")
-
     val userFeat = FeatureEngineer.UserFeat(orders,priorsOrders)
     val userXproductFeat = FeatureEngineer.userXproduct(priorsOrders)
 
@@ -33,7 +37,6 @@ object LRTest {
                               userFeat,
                               product3Feat,
                               userXproductFeat,trains,labels_given = true)
-
 
 
     val df = df1.limit(1000)
@@ -77,10 +80,10 @@ object LRTest {
 
     // Set the model threshold to maximize F-Measure
     val fMeasure = binarySummary.fMeasureByThreshold
-    val maxFMeasure = fMeasure.selectExpr(max("F-Measure")).head().getDouble(0)
-    val bestThreshold = fMeasure.filter(fMeasure("F-Measure")===maxFMeasure)
-      .select("threshold").head().getDouble(0)
-    lrModel.setThreshold(bestThreshold)
+   // val maxFMeasure = fMeasure.selectExpr(max("F-Measure")).head().getDouble(0)
+   // val bestThreshold = fMeasure.filter(fMeasure("F-Measure")===maxFMeasure)
+    //  .select("threshold").head().getDouble(0)
+   // lrModel.setThreshold(bestThreshold)
   }
 
 }

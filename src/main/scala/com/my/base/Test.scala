@@ -1,5 +1,6 @@
 package com.my.base
 
+import scala.collection.mutable
 import breeze.numerics.log
 import com.huaban.analysis.jieba.JiebaSegmenter.SegMode
 import com.huaban.analysis.jieba.{JiebaSegmenter, SegToken}
@@ -8,11 +9,10 @@ import org.apache.spark.ml.feature.HashingTF
 import org.apache.spark.mllib.linalg.{Vector, Vectors}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, SparkSession}
-import scala._
 
 
 object Test {
-/*  def main(args: Array[String]): Unit = {
+ def main(args: Array[String]): Unit = {
     val warehouselocation = "hdfs://user/hive/warehouse/badou.db"
     val conf = new SparkConf()
       //需要在使用时注册需要序列化的类型
@@ -121,5 +121,5 @@ object Test {
     df_seg.show()
     val tf = new HashingTF()
 
-  }*/
+  }
 }

@@ -1,14 +1,12 @@
-package com.my.base
+package com.my.base.nb
 
-import com.huaban.analysis.jieba.JiebaSegmenter.SegMode
-import com.huaban.analysis.jieba.{JiebaSegmenter, SegToken}
+import com.huaban.analysis.jieba.JiebaSegmenter
 import com.my.base.jieba.JiebaSeg
 import org.apache.spark.SparkConf
 import org.apache.spark.ml.classification.NaiveBayes
 import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.feature.{HashingTF, IDF, StringIndexer}
-import org.apache.spark.sql.functions.{col, udf}
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.SparkSession
 
 
 object NB_test {
