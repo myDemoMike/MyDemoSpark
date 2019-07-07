@@ -1,4 +1,4 @@
-package com.my.base.cf
+package com.my.base.als
 
 import org.apache.spark.ml.evaluation.RegressionEvaluator
 import org.apache.spark.ml.feature.StringIndexer

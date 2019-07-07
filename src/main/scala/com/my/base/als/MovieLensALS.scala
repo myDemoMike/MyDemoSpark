@@ -1,32 +1,62 @@
 package com.my.base.als
 
-import org.apache.spark.mllib.recommendation.Rating
-import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.ml.evaluation.RegressionEvaluator
+import org.apache.spark.ml.recommendation.ALS
+import org.apache.spark.sql.SparkSession
 
 object MovieLensALS {
+
+  // $example on$
+  case class Rating(userId: Int, movieId: Int, rating: Float, timestamp: Long)
+  def parseRating(str: String): Rating = {
+    val fields = str.split("::")
+    assert(fields.size == 4)
+    Rating(fields(0).toInt, fields(1).toInt, fields(2).toFloat, fields(3).toLong)
+  }
+  // $example off$
+
   def main(args: Array[String]) {
+    val spark = SparkSession
+      .builder
+      .appName("ALSExample").master("local[*]")
+      .getOrCreate()
+    import spark.implicits._
 
-    val conf = new SparkConf()
-      .setAppName("MovieLensALS")
-      //设置内存  代码优先于外部设置
-      .set("spark.executor.memory", "1g")
+    // $example on$
+    val ratings = spark.read.textFile("sample_movielens_ratings.txt")
+      .map(parseRating)
+      .toDF()
+    val Array(training, test) = ratings.randomSplit(Array(0.8, 0.2))
 
-    val sc = new SparkContext(conf)
+    // Build the recommendation model using ALS on the training data
+    val als = new ALS()
+      .setMaxIter(5)
+      .setRegParam(0.01)
+      .setUserCol("userId")
+      .setItemCol("movieId")
+      .setRatingCol("rating")
+    val model = als.fit(training)
 
-    val ratings = sc.textFile("/u1.test").map {
-      line => val fields = line.split("\t")
-        (fields(3).toLong % 10, Rating(fields(0) toInt, fields(1).toInt, fields(2).toDouble))
-    }
+    // Evaluate the model by computing the RMSE on the test data
+    // Note we set cold start strategy to 'drop' to ensure we don't get NaN evaluation metrics
+    model.setColdStartStrategy("drop")
+    val predictions = model.transform(test)
 
-    val movies = sc.textFile("/u.item").map {
-      line => val fields = line.split('|')
-        (fields(0).toInt, fields(1))
-    }
+    val evaluator = new RegressionEvaluator()
+      .setMetricName("rmse")
+      .setLabelCol("rating")
+      .setPredictionCol("prediction")
+    val rmse = evaluator.evaluate(predictions)
+    println(s"Root-mean-square error = $rmse")
 
-    val numRatings = ratings.count
-    val numUsers = ratings.map(_._2.user).distinct.count
-    val numMovies = ratings.map(_._2.product).distinct.count
-    println("Got " + numRatings + " ratings from "
-      + numUsers + " users on " + numMovies + " movies.")
+    // Generate top 10 movie recommendations for each user
+    val userRecs = model.recommendForAllUsers(10)
+    // Generate top 10 user recommendations for each movie
+    val movieRecs = model.recommendForAllItems(10)
+    // $example off$
+    userRecs.show(false)
+    movieRecs.show(false)
+
+    spark.stop()
   }
 }
