@@ -34,7 +34,8 @@ object ALSTrain {
 
     // setRank 隐变量向量  setRegParam 正则
     val als = new ALS().setMaxIter(10).setRank(10).setRegParam(0.01).setUserCol("user_id_indexed").setItemCol("item_id_indexed").setRatingCol("rating").setPredictionCol("prediction")
-
+      // 设置setImplicitPrefs为true更好
+      .setImplicitPrefs(true)
     val model = als.fit(training)
     training.unpersist()
     model.userFactors.show()

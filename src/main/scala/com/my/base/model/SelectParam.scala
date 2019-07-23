@@ -1,4 +1,4 @@
-package com.my.base.feature
+package com.my.base.model
 
 import org.apache.spark.SparkConf
 import org.apache.spark.ml.classification.{LogisticRegression, LogisticRegressionModel}

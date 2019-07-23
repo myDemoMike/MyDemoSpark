@@ -15,7 +15,7 @@ import org.apache.hadoop.hbase.util.Bytes
 object HBaseCreateTable {
   def main(args: Array[String]) {
     val TABLE_NAME = "test_yuan"
-    val zookeeper_quorum = "bqbpm2.bqjr.cn,bqbpm1.bqjr.cn,bqbps2.bqjr.cn"
+    val zookeeper_quorum = "bqgraphx3,bqgraphx4,bqgraphx5"
     val zookeeper_client_port = "2181"
     val hBaseConf = HBaseConfiguration.create()
     hBaseConf.set(HConstants.ZOOKEEPER_QUORUM, zookeeper_quorum)

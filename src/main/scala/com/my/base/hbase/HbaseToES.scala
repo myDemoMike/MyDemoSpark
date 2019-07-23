@@ -1,13 +1,11 @@
 package com.my.base.hbase
 
-import com.bqjr.bigdata.util.ConfigUtil
 import org.apache.hadoop.hbase.client._
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable
 import org.apache.hadoop.hbase.util.Bytes
 import org.apache.hadoop.hbase.{HBaseConfiguration, HConstants}
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
-import org.elasticsearch.spark.rdd.EsSpark
 
 /**
   * @Author: Yuan Liu
@@ -23,13 +21,12 @@ object HbaseToES {
   def main(args: Array[String]): Unit = {
     val zookeeper_quorum = "bqbpm2.bqjr.cn,bqbpm1.bqjr.cn,bqbps2.bqjr.cn"
     val zookeeper_client_port = "2181"
-    val config = ConfigUtil.getConfig
     val sparkConf = new SparkConf().setAppName("HbaseToES")
-      .set("es.nodes", config.getString("app.es.ips"))
-      .set("es.port", config.getString("app.es.port"))
+      .set("es.nodes", "10.31.1.122")
+      .set("es.port", "9200")
       .set("es.index.auto.create", "true")
-      .set("es.net.http.auth.user", config.getString("app.es.es_user_name"))
-      .set("es.net.http.auth.pass", config.getString("app.es.es_user_pass"))
+      .set("es.net.http.auth.user","userName")
+      .set("es.net.http.auth.pass","passWord")
 
     val ssc = SparkSession.builder().appName("SparkFromHBase").master("local[*]").config(sparkConf).getOrCreate()
     val sc = ssc.sparkContext
@@ -52,7 +49,7 @@ object HbaseToES {
     println("数据量 " + result.count())
     //result.take(10).foreach(println)
 
-    EsSpark.saveToEs(result, "test/hbase")
+    // EsSpark.saveToEs(result, "test/hbase")
   }
 
   case class testInsert(row_id: String,
