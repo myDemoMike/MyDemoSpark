@@ -51,7 +51,6 @@ public class NewDigest {
 //        zk.getChildren("/zk_test",true);
 //        zk.getData("/zk_test",true,null);
         zk.exists("/zk_test", new Watcher() {
-            @Override
             public void process(WatchedEvent event) {
                 System.out.println(event);
             }

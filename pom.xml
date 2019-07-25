@@ -12,9 +12,22 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <scala.binary.version>2.11</scala.binary.version>
         <spark.version>2.2.0</spark.version>
+        <phoenix.version>4.14.0-HBase-1.2</phoenix.version>
+        <hbase.version>1.2.0</hbase.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.11.1</version>
+        </dependency>
+        <!-- log4j2 AsyncLogger need disruptor-->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.2</version>
+        </dependency>
         <dependency>
             <groupId>org.scalanlp</groupId>
             <artifactId>breeze_2.11</artifactId>
@@ -78,19 +91,25 @@
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
-            <version>1.2.0</version>
+            <version>${hbase.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-server</artifactId>
-            <version>1.2.0</version>
+            <version>${hbase.version}</version>
         </dependency>
         <!-- phoenix  -->
         <dependency>
             <groupId>org.apache.phoenix</groupId>
             <artifactId>phoenix-core</artifactId>
-            <version>4.14.0-HBase-1.2</version>
+            <version>${phoenix.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-spark</artifactId>
+            <version>${phoenix.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>MyDemoSpark</finalName>

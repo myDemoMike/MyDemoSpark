@@ -50,7 +50,6 @@ public class TestDemo {
         //  zk.setData("/zk_test/test","badou".getBytes(),-1);
 
         zk.exists("/zk_test", new Watcher() {
-            @Override
             public void process(WatchedEvent event) {
                 System.out.println(event);
             }

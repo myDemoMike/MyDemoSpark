@@ -14,7 +14,7 @@ import org.apache.hadoop.hbase.util.Bytes
 // 查看表结构  describe
 object HBaseCreateTable {
   def main(args: Array[String]) {
-    val TABLE_NAME = "test_yuan"
+    val TABLE_NAME = "TEST_YUAN"
     val zookeeper_quorum = "bqgraphx3,bqgraphx4,bqgraphx5"
     val zookeeper_client_port = "2181"
     val hBaseConf = HBaseConfiguration.create()
@@ -29,12 +29,12 @@ object HBaseCreateTable {
       }
       //2\创建描述
       val h_table = new HTableDescriptor(TableName.valueOf(TABLE_NAME));
-      val column = new HColumnDescriptor("base".getBytes());
+      val column = new HColumnDescriptor("BASE".getBytes());
       //column.setBlockCacheEnabled(true)
       //column.setBlocksize(2222222)
       // 添加列簇
       h_table.addFamily(column);
-      h_table.addFamily(new HColumnDescriptor("gps".getBytes()));
+     // h_table.addFamily(new HColumnDescriptor("GPS".getBytes()));
       //3\创建表
       admin.createTable(h_table)
       val table = connect.getTable(TableName.valueOf(TABLE_NAME))
@@ -42,10 +42,10 @@ object HBaseCreateTable {
       //插入5条数据
       for (i <- 1 to 5) {
         // 这里是主键
-        val put = new Put(Bytes.toBytes("row" + i))
+        val put = new Put(Bytes.toBytes("ROW" + i))
         // 必须添加到已经存在的列簇，列名可以不存在。
-        put.addColumn(Bytes.toBytes("base"), Bytes.toBytes("name"), Bytes.toBytes("value " + i))
-        put.addColumn(Bytes.toBytes("base"), Bytes.toBytes("famm"), Bytes.toBytes("value " + i))
+        put.addColumn(Bytes.toBytes("BASE"), Bytes.toBytes("NAME"), Bytes.toBytes("value " + i))
+        put.addColumn(Bytes.toBytes("BASE"), Bytes.toBytes("FAMM"), Bytes.toBytes("value " + i+"2"))
         table.put(put)
       }
       table.close()
