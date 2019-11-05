@@ -23,10 +23,6 @@ object Kmeans_news {
       .config(conf)
       //getOrCreate()：有就拿过来，没有就创建，类似于单例模式
       .getOrCreate()
-    //s1 = SparkSession().builder.config("k1", "v1").getORCreat()
-    //s2 = SparkSession().builder.config("k2", "v2").getORCreat()
-    //return s1.conf.get("k1") == s2.conf.get("k2")
-    //True
 
     val df = spark.sql("select content from test.news_no_seg limit  300")
     val df_seg = JiebaSeg.jieba_seg(df, "content", spark)
@@ -60,7 +56,6 @@ object Kmeans_news {
     val formula = new RFormula()
       .setFormula("clicked ~ country + hour+count")
       .setFeaturesCol("features")
-
 
     val model = kmeans.fit(df_tfidf)
     val WSSSE = model.computeCost(df_tfidf)

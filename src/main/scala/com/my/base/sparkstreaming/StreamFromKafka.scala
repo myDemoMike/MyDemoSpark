@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON
 import com.my.base.json.LogGen
 import com.my.base.schema.Schema
 import org.apache.spark.SparkConf
+
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.{Row, SaveMode, SparkSession}
@@ -42,7 +43,7 @@ object StreamFromKafka {
     //（3）重点：如果有几条数据有问题，影响整个spark streaming任务，怎么解决
     //（4）返回需要ROW()，需要我们定义的class的get方法取到我们想要的数据放到Row里面
 
-    //      通过Receiver接收kafka数据
+    //      通过Receiver接收kafka数据createDirectStream
     val mesR = KafkaUtils.createStream(ssc, ZK_QUORUM, group_id, topicMap).map(_._2)
 
     //产生的文件数量变少

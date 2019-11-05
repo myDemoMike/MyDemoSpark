@@ -18,7 +18,6 @@ object KMeans_Test {
       }).cache()
 
     // Cluster the data into two classes using KMeans
-
     val numClusters = 8
     val numIterations = 30
     val runTimes = 3

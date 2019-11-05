@@ -9,6 +9,9 @@ import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}
 import org.apache.spark.ml.{Pipeline, PipelineModel}
 import org.apache.spark.sql.{Row, SparkSession}
 
+/**
+  * 模型参数调优
+  */
 // http://spark.apache.org/docs/2.2.0/ml-tuning.html  参数选择
 // https://juejin.im/post/5bc976db518825780324fd1a
 // 通过配置日志文件可以选择输出最优参数

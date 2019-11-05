@@ -18,7 +18,6 @@ scan 'test_yuan', FILTER=>"ValueFilter(=,'substring:1')"   值包含了1
 scan 'test_yuan', FILTER=>"ColumnPrefixFilter('name') AND ValueFilter(=,'binary:value 1')"   查询某一列的值以及这列的值等于。
 
 
-
 phoenix建表
 create table test (mykey integer not null primary key, mycolumn varchar);
 upsert into test values(1,'Hello');
@@ -32,3 +31,5 @@ https://blog.csdn.net/Yuan_CSDF/article/details/97264624
 
 !table   查看表
 !quit
+
+

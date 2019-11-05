@@ -3,26 +3,29 @@ package com.my.base.json;
 import java.io.Serializable;
 
 
-public class LogGen implements Serializable{
+public class LogGen implements Serializable {
 
-        public void setWord(String word) {
-            this.word = word;
-        }
 
-        public void setLabel(String label) {
-            this.label = label;
-        }
+    private String word;
 
-        public String getWord() {
-            return word;
-        }
+    private String label;
 
-        public String getLabel() {
-            return label;
-        }
+    public void setWord(String word) {
+        this.word = word;
+    }
 
-        private String word;
-        private String label;
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
 
 }
 

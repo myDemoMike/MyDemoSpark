@@ -1,9 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 .idea
-/src/main/resources/core-site.xml
-/src/main/resources/hbase-site.xml
-/src/main/resources/hdfs-site.xml
-/src/main/resources/hive-site.xml
-/src/main/resources/yarn-site.xml
-target/
+#/src/main/resources/core-site.xml
+#/src/main/resources/hbase-site.xml
+#/src/main/resources/hdfs-site.xml
+#/src/main/resources/hive-site.xml
+#/src/main/resources/yarn-site.xml

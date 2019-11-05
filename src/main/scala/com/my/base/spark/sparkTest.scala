@@ -34,8 +34,6 @@ object sparkTest {
     //可以直接存储，hive表
     df2.write.mode("overwrite").saveAsTable("testA")
 
-
-
     def jieba_cut(df: DataFrame, colname: String): DataFrame = {
       val segmenter = new JiebaSegmenter()
       val seg = spark.sparkContext.broadcast(segmenter)

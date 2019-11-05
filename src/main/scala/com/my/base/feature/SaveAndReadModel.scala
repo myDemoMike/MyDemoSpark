@@ -1,13 +1,15 @@
 package com.my.base.feature
 
 import org.apache.spark.SparkConf
-import org.apache.spark.ml.{Pipeline, PipelineModel}
 import org.apache.spark.ml.classification.LogisticRegression
 import org.apache.spark.ml.feature.{HashingTF, Tokenizer}
 import org.apache.spark.ml.linalg.Vector
-import org.apache.spark.mllib.clustering.KMeans
+import org.apache.spark.ml.{Pipeline, PipelineModel}
 import org.apache.spark.sql.{Row, SparkSession}
 
+/**
+  * 模型存储
+  */
 // http://spark.apache.org/docs/2.2.0/ml-pipeline.html
 object SaveAndReadModel {
   def main(args: Array[String]): Unit = {
@@ -36,11 +38,11 @@ object SaveAndReadModel {
 
     // Fit the pipeline to training documents.
     val model = pipeline.fit(training)
-    KMeans
+
     // 保存为PipilineModel模型
-    // Now we can optionally save the fitted pipeline to disk
+    // Now we can optionally save the fitted pipelSADine to disk
     model.write.overwrite().save("./spark-logistic-regression-model")
-    // 保存文件的PMML格式
+    // 保存文件的PMML格式a
 
     // And load it back in during production
     val sameModel = PipelineModel.load("./spark-logistic-regression-model")

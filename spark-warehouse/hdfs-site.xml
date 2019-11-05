@@ -30,7 +30,7 @@
 	<property>
 		<name>dfs.replication</name>
 		<value>2</value>
-		<description>设定 HDFS 存储文件的副本个数，默认为3</description>
+		<description>设定HDFS存储文件的副本个数，默认为3</description>
 	</property>
 	<property>
 		<name>dfs.webhdfs.enabled</name>

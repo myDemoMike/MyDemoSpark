@@ -1,0 +1,43 @@
+1.java调用sklearn生成的pmml:Predictive Model Markup Language预测模型标记语言
+
+python代码
+from sklearn import linear_model
+
+import numpy as np
+import pandas
+from sklearn.preprocessing import MinMaxScaler, LabelBinarizer, FunctionTransformer
+from sklearn2pmml import sklearn2pmml
+from sklearn2pmml.pipeline import PMMLPipeline
+from sklearn_pandas import DataFrameMapper
+
+heart_data = pandas.read_csv("heart.csv")
+# 用Mapper定义特征工程
+mapper = DataFrameMapper([
+    (['sbp'], MinMaxScaler()),
+    (['tobacco'], MinMaxScaler()),
+    ('ldl', None),
+    ('adiposity', None),
+    (['famhist'], LabelBinarizer()),
+    ('typea', None),
+    ('obesity', None),
+    ('alcohol', None),
+    (['age'], FunctionTransformer(np.log)),
+])
+
+# 用pipeline定义使用的模型，特征工程等
+pipeline = PMMLPipeline([
+    ('mapper', mapper),
+    ("classifier", linear_model.LinearRegression())
+])
+
+pipeline.fit(heart_data[heart_data.columns.difference(["chd"])], heart_data["chd"])
+sklearn2pmml(pipeline, "lrHeart.xml", with_repr=True)
+
+java调用代码com.my.base.pmml.PMMLDemo
+
+
+pmml缺点
+1、PMML为了满足跨平台，牺牲了很多平台独有的优化。所以很多时候我们用算法库自己的api保存得到的模型文件要比转为PMML的模型文件小很多。
+    同时PMML模型文件加载也要比算法自己独有的格式文件慢很多。
+2、用PMML模型文件预测的结果跟算法自身预测的结果会有一点点偏差，尽管不大。
+3、对于复杂的模型如xgboost、tensorflow等，生成的PMML模型文件会很大，加载和预测会慢很多。
