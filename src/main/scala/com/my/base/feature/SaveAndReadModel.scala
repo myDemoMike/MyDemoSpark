@@ -40,9 +40,9 @@ object SaveAndReadModel {
     val model = pipeline.fit(training)
 
     // 保存为PipilineModel模型
-    // Now we can optionally save the fitted pipelSADine to disk
+    // Now we can optionally save the fitted pipeline to disk
     model.write.overwrite().save("./spark-logistic-regression-model")
-    // 保存文件的PMML格式a
+    // 保存文件的PMML格式
 
     // And load it back in during production
     val sameModel = PipelineModel.load("./spark-logistic-regression-model")
