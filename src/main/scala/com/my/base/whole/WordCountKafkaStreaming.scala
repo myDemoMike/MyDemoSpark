@@ -37,6 +37,14 @@ object WordCountKafkaStreaming {
       x._2
     }
 
+    lines.foreachRDD(x=>{   // x RDD[String]
+      x.foreachPartition(y=>{  // y iterator[String]
+        y.foreach(z=>{   // z String
+            z
+        })
+      })
+    })
+
     val words = lines.flatMap(_.split(" "))
     //val wordCounts = words.map(x => (x, 1)).reduceByKey(_ + _)
     val wordCounts = words.map(x => (x, 1)).updateStateByKey(updateFunc, new HashPartitioner(ssc.sparkContext.defaultParallelism), true)

@@ -18,6 +18,7 @@
         <fastjson.version>1.2.58</fastjson.version>
         <jieba.version>1.0.2</jieba.version>
         <mysql.version>8.0.15</mysql.version>
+        <scope.type>compile</scope.type>
     </properties>
 
     <dependencies>
@@ -48,36 +49,43 @@
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
+            <scope>${scope.type}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+            <scope>${scope.type}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+            <scope>${scope.type}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+            <scope>${scope.type}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-hive_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+            <scope>${scope.type}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-mllib_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+            <scope>${scope.type}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming-kafka-0-8_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+            <scope>${scope.type}</scope>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -89,7 +97,6 @@
             <artifactId>jieba-analysis</artifactId>
             <version>${jieba.version}</version>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
